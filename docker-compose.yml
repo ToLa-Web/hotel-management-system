@@ -27,7 +27,6 @@ services:
     restart: unless-stopped
     working_dir: /var/www
     volumes:
-      - ./backend:/var/www
       - backend_storage:/var/www/storage
     environment:
       APP_NAME: "Hotel API"
