@@ -8,10 +8,16 @@ until nc -z "${DB_HOST}" "${DB_PORT}"; do
 done
 echo "MySQL is up."
 
+# Create minimal .env if missing (production passes config via Docker env vars)
+if [ ! -f /var/www/.env ]; then
+  printf "APP_KEY=%s\n" "${APP_KEY:-}" > /var/www/.env
+fi
+
 # Generate application key if not set
 if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "base64:" ]; then
   echo "Generating application key..."
   php artisan key:generate --force
+  echo ">>> COPY THIS TO YOUR SERVER .env: $(grep APP_KEY /var/www/.env)"
 fi
 
 # Run migrations
