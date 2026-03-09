@@ -1,0 +1,19 @@
+# Environment files (secrets)
+.env
+.env.*
+*.env
+
+# Dependencies
+node_modules/
+vendor/
+
+# Laravel storage
+backend/storage/logs/*
+!backend/storage/logs/.gitkeep
+
+# Next.js build
+Frontend/.next/
+
+# OS files
+.DS_Store
+Thumbs.db
